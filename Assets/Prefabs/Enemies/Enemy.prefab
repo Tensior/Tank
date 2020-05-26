@@ -14,14 +14,13 @@ GameObject:
   - component: {fileID: 3361882666140583012}
   - component: {fileID: 3361882666140583015}
   - component: {fileID: 3361882666140583008}
-  - component: {fileID: 8290860927405563533}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3361882666140583011
 Transform:
   m_ObjectHideFlags: 0
@@ -131,17 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49187c35390bbd24199a33e96515cb3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8290860927405563533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3361882666140583014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27318736e3349054ca16ff4e576555f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth_: 100
-  armor_: 0.5
+  maxHealth_: 75
+  armor_: 0.3
+  damage_: 8

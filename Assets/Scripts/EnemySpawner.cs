@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent( typeof( EnemyPool ) )]
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField]
-    private Enemy[] enemyPrefabs_;
-    private Queue<Enemy>[] enemyPools_;
-
     [SerializeField]
     private int maxNumberOfEnemies_ = 10;
     private int currentNumberOfEnemies_ = 0;
@@ -20,30 +15,23 @@ public class EnemySpawner : MonoBehaviour
     private int numberOfSpawnPoints_ = 10;
     private List<Transform> spawnTransforms_;
 
+    private EnemyPool[] enemyPools_;
+
     // Start is called before the first frame update
     private void Awake()
     {
         CalculateSpawnTransforms();
-        CreateEnemyPools();
+        GetEnemyPools();
     }
 
-    private void CreateEnemyPools()
+    private void GetEnemyPools()
     {
-        enemyPools_ = new Queue<Enemy>[enemyPrefabs_.Length];
-        for ( int i = 0; i < enemyPools_.Length; i++ )
-        {
-            enemyPools_[i] = new Queue<Enemy>();
-        }
+        enemyPools_ = GetComponents<EnemyPool>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if ( Input.GetKeyDown( KeyCode.Z ) )
-        {
-            CalculateSpawnTransforms();
-        }
-
         if( currentNumberOfEnemies_ < maxNumberOfEnemies_)
         {
             SpawnEnemy();
@@ -52,7 +40,20 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
+        int enemyType = Random.Range( 0, enemyPools_.Length );
+        int enemyTransform = Random.Range( 0, spawnTransforms_.Count );
 
+        var newEnemy = enemyPools_[enemyType].GetFromPool();
+        newEnemy.gameObject.SetActive( true );
+        newEnemy.transform.SetPositionAndRotation( spawnTransforms_[enemyTransform].position, spawnTransforms_[enemyTransform].rotation );
+        ++currentNumberOfEnemies_;
+
+        newEnemy.OnDeath += DecreaseCurrentNumberOfEnemies;
+    }
+
+    private void DecreaseCurrentNumberOfEnemies()
+    {
+        --currentNumberOfEnemies_;
     }
 
     private void CalculateSpawnTransforms()
@@ -80,7 +81,7 @@ public class EnemySpawner : MonoBehaviour
         //create new
         spawnTransforms_ = new List<Transform>( numberOfSpawnPoints_ );
 
-        var spawnSteps = new Vector2Int( (int) spawnRect_.size.x / (nSpawns_.x + 1), (int) spawnRect_.size.y / (nSpawns_.y + 1) );
+        var spawnSteps = new Vector2( spawnRect_.size.x / (nSpawns_.x + 1), spawnRect_.size.y / (nSpawns_.y + 1) );
 
         for (int i = 0; i < nSpawns_.x; i++ )
         {
@@ -92,7 +93,7 @@ public class EnemySpawner : MonoBehaviour
 
             //points on top side
             currentY = spawnRect_.yMax;
-            currentRotation = Quaternion.LookRotation( Vector3.forward, Vector3.up );
+            currentRotation = Quaternion.LookRotation( Vector3.back, Vector3.up );
             AddSpawnPoint( currentX, currentY, currentRotation );
         }
 
@@ -123,9 +124,12 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        foreach ( var spawnTransform in spawnTransforms_ )
+        if ( spawnTransforms_ != null )
         {
-            Gizmos.DrawLine( spawnTransform.position, spawnTransform.position + spawnTransform.forward );
+            foreach ( var spawnTransform in spawnTransforms_ )
+            {
+                Gizmos.DrawLine( spawnTransform.position, spawnTransform.position + spawnTransform.forward );
+            }
         }
     }
 }

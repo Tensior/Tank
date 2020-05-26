@@ -3,17 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GenericObjectPool<T> : MonoBehaviour where T : Component
+public interface IGenericPoolableObject<T> where T : Component, IGenericPoolableObject<T>
+{
+    GenericObjectPool<T> Pool { get; set; }
+}
+public abstract class GenericObjectPool<T> : MonoBehaviour where T : Component, IGenericPoolableObject<T>
 {
     [SerializeField]
     private T prefab_;
 
-    public static GenericObjectPool<T> Instance { get; private set; }
-    private Queue<T> objects = new Queue<T>();
+    protected Queue<T> objects = new Queue<T>();
 
     private void Awake()
     {
-        Instance = this;
+        prefab_.gameObject.SetActive( false ); //so that Instantiate doesn't call OnEnable(), but it will only be called by SetActive(true) when needed
     }
 
     public T GetFromPool()
@@ -29,6 +32,7 @@ public abstract class GenericObjectPool<T> : MonoBehaviour where T : Component
     {
         var newObject = Instantiate( prefab_ );
         newObject.gameObject.SetActive( false );
+        newObject.Pool = this;
         objects.Enqueue( newObject );
     }
 

@@ -7,6 +7,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3361882666140583008, guid: 8c27751634b542246a0321ee631b7a49,
+        type: 3}
+      propertyPath: maxHealth_
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3361882666140583008, guid: 8c27751634b542246a0321ee631b7a49,
+        type: 3}
+      propertyPath: armor_
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3361882666140583008, guid: 8c27751634b542246a0321ee631b7a49,
+        type: 3}
+      propertyPath: damage_
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3361882666140583011, guid: 8c27751634b542246a0321ee631b7a49,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -76,6 +91,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyFastHorizontal
+      objectReference: {fileID: 0}
+    - target: {fileID: 3361882666140583014, guid: 8c27751634b542246a0321ee631b7a49,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3361882666140583015, guid: 8c27751634b542246a0321ee631b7a49,
         type: 3}

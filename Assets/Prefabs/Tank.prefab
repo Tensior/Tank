@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 5028983146254927703}
   - component: {fileID: 5028983146254927704}
   - component: {fileID: 5028983146254927705}
-  - component: {fileID: 5966403818038736090}
+  - component: {fileID: 85888979}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -268,7 +268,7 @@ MonoBehaviour:
   weapons_:
   - {fileID: 9024729952387107961, guid: 9f0d5cc0ee2bb8e4cb1f2963f2a6cf3d, type: 3}
   weaponPosition_: {fileID: 5028983146208546501}
---- !u!114 &5966403818038736090
+--- !u!114 &85888979
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -277,6 +277,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5028983146254927710}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27318736e3349054ca16ff4e576555f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 46c1070f219f88a42835482fd0a44e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth_: 100
+  armor_: 0.5
+  playerDied_: 0

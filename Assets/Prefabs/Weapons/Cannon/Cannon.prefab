@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 7599407282949394757}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 1, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_Children:
   - {fileID: 9127992283785210230}
   m_Father: {fileID: 0}
@@ -139,11 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f982c9e73c7b2d49bcdf10289425678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate_: 10
-  shellPrefab_: {fileID: 8857731666761738424, guid: 7b50c17d9fea19a4a947fcd0a592140e,
-    type: 3}
+  fireRate_: 2
   shellSpawnPosition_: {fileID: 9127992283785210230}
-  poolSize_: 100
 --- !u!114 &-7578566033879258647
 MonoBehaviour:
   m_ObjectHideFlags: 0
