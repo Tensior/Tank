@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SocialPlatforms;
+﻿using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
@@ -50,15 +46,13 @@ public class MovementController : MonoBehaviour
         if ( moveInput_ != Vector3.zero )
         {
             var newPosition = rigidBody_.position + moveInput_;
+            var areaBounds = allowedArea_.bounds;
+            areaBounds.Expand( new Vector3(-1f, 0f, -1f ) ); //shrink allowed area a bit
 
-            // Constrain movement if allowedArea_ was provided
-            if ( !allowedArea_ || allowedArea_.bounds.Contains( new Vector3( newPosition.x, allowedArea_.bounds.center.y, newPosition.z ) ) )
+            // Constrain movement
+            if ( areaBounds.Contains( new Vector3( newPosition.x, areaBounds.center.y, newPosition.z ) ) )
             {
                 rigidBody_.MovePosition( newPosition );
-            }
-            else
-            {
-                Debug.Log( "constraining..." );
             }
         }
     }
@@ -70,44 +64,4 @@ public class MovementController : MonoBehaviour
             rigidBody_.MoveRotation( rigidBody_.rotation * rotateInput_ );
         }
     }
-
-    //private void Update()
-    //{
-    //    ReadInput();
-    //}
-
-    //private void ReadInput()
-    //{
-    //    moveDirection_ = new Vector3( Input.GetAxis( "Horizontal" ), 0.0f, Input.GetAxis( "Vertical" ) ).normalized;
-    //}
-
-    //void FixedUpdate()
-    //{
-    //    if ( moveDirection_ != Vector3.zero )
-    //    {
-    //        // Rotate so that move direction becomes local forward
-    //        var localForward = transform.TransformDirection( Vector3.forward );
-    //        if ( moveDirection_ != localForward )
-    //        {
-    //            //Rotating
-    //            Debug.Log( "rotating..." );
-    //            /*transform.rotation*/
-    //            rigidBody_.MoveRotation( Quaternion.RotateTowards( rigidBody_.rotation, 
-    //                                                               Quaternion.LookRotation( moveDirection_, Vector3.up ), 
-    //                                                               rotateSpeed_ * Time.fixedDeltaTime ) );
-    //        }
-
-    //        var newPosition = transform.position + moveDirection_ * speed_ * Time.fixedDeltaTime;
-
-    //        // Constrain movement if allowedArea_ was provided
-    //        if ( !allowedArea_ || allowedArea_.bounds.Contains( new Vector3( newPosition.x, allowedArea_.bounds.center.y, newPosition.z ) ) )
-    //        {
-    //            rigidBody_.MovePosition( newPosition );
-    //        }
-    //        else
-    //        {
-    //            Debug.Log( "constraining..." );
-    //        }
-    //    }
-    //}
 }

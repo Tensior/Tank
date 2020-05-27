@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
 
 [RequireComponent( typeof( NavMeshAgent ) )]
 public class Enemy : CombatController, IGenericPoolableObject<Enemy>
@@ -19,10 +18,9 @@ public class Enemy : CombatController, IGenericPoolableObject<Enemy>
         navMeshAgent_ = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
     private void FixedUpdate()
     {
-        if ( target_ != null ) // may be null if this enemy was awakened after player death and deactivation
+        if ( target_ != null && target_.gameObject.activeInHierarchy ) // may be null if this enemy was awakened after player death and deactivation
         {
             navMeshAgent_.SetDestination( target_.transform.position );
         }
@@ -33,13 +31,13 @@ public class Enemy : CombatController, IGenericPoolableObject<Enemy>
         if ( other.gameObject == target_.gameObject )
         {
             target_.TakeDamage( damage_ );
-            AllHealthLost();
+            AllHealthLost(); //self destruct when hit player
         }
     }
 
     protected override void AllHealthLost()
     {
-        Pool.ReturnToPool( this );
         base.AllHealthLost();
+        Pool.ReturnToPool( this );
     }
 }

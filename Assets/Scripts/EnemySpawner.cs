@@ -12,12 +12,10 @@ public class EnemySpawner : MonoBehaviour
     private Rect spawnRect_; // x -> x, y -> z for world positioning
     [SerializeField]
     Vector2Int nSpawns_;
-    private int numberOfSpawnPoints_ = 10;
     private List<Transform> spawnTransforms_;
 
     private EnemyPool[] enemyPools_;
 
-    // Start is called before the first frame update
     private void Awake()
     {
         CalculateSpawnTransforms();
@@ -29,7 +27,6 @@ public class EnemySpawner : MonoBehaviour
         enemyPools_ = GetComponents<EnemyPool>();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if( currentNumberOfEnemies_ < maxNumberOfEnemies_)
@@ -40,12 +37,12 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        int enemyType = Random.Range( 0, enemyPools_.Length );
-        int enemyTransform = Random.Range( 0, spawnTransforms_.Count );
+        int enemyTypeIndex = Random.Range( 0, enemyPools_.Length );
+        int enemyTransformIndex = Random.Range( 0, spawnTransforms_.Count );
 
-        var newEnemy = enemyPools_[enemyType].GetFromPool();
+        var newEnemy = enemyPools_[enemyTypeIndex].GetFromPool();
         newEnemy.gameObject.SetActive( true );
-        newEnemy.transform.SetPositionAndRotation( spawnTransforms_[enemyTransform].position, spawnTransforms_[enemyTransform].rotation );
+        newEnemy.transform.SetPositionAndRotation( spawnTransforms_[enemyTransformIndex].position, spawnTransforms_[enemyTransformIndex].rotation );
         ++currentNumberOfEnemies_;
 
         newEnemy.OnDeath += DecreaseCurrentNumberOfEnemies;
@@ -58,31 +55,13 @@ public class EnemySpawner : MonoBehaviour
 
     private void CalculateSpawnTransforms()
     {
-        numberOfSpawnPoints_ = 2 * ( nSpawns_.x + nSpawns_.y );
+        int numberOfSpawnPoints = 2 * ( nSpawns_.x + nSpawns_.y );
 
-        if ( spawnTransforms_ != null )
-        {
-            if ( spawnTransforms_.Count == numberOfSpawnPoints_ )
-            {
-                return;
-            }
-
-            //destroy old spawn points
-            foreach ( var spawnTransform in spawnTransforms_ )
-            {
-                if ( spawnTransform )
-                {
-                    Destroy( spawnTransform.gameObject );
-                }
-            }
-            spawnTransforms_.Clear();
-        }
-
-        //create new
-        spawnTransforms_ = new List<Transform>( numberOfSpawnPoints_ );
+        spawnTransforms_ = new List<Transform>( numberOfSpawnPoints );
 
         var spawnSteps = new Vector2( spawnRect_.size.x / (nSpawns_.x + 1), spawnRect_.size.y / (nSpawns_.y + 1) );
 
+        //set positions and rotations for all spawn points
         for (int i = 0; i < nSpawns_.x; i++ )
         {
             //points on bottom side

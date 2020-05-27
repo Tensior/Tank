@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Shell : MonoBehaviour, IGenericPoolableObject<Shell>
 {
@@ -15,13 +13,12 @@ public class Shell : MonoBehaviour, IGenericPoolableObject<Shell>
 
     private float maxLifeTime_ = 0f;
 
-    // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
         maxLifeTime_ = 100f / speed_; //100 units is an approximate size of the scene
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         Invoke( "ReturnShellToPool", maxLifeTime_ );
     }
@@ -40,8 +37,11 @@ public class Shell : MonoBehaviour, IGenericPoolableObject<Shell>
             enemy.TakeDamage( damage_ );
         }
 
-        //Destroy shell on any collision
-        ReturnShellToPool();
+        //Destroy shell on any collision except other shells
+        if ( !other.gameObject.GetComponent<Shell>() )
+        {
+            ReturnShellToPool();
+        }
     }
 
     private void ReturnShellToPool()

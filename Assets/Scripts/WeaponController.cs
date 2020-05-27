@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
@@ -25,17 +22,16 @@ public class WeaponController : MonoBehaviour
         {
             //swap prefabs with cloned objects
             weapons_[i] = Instantiate( weapons_[i] );
+
             weapons_[i].transform.SetParent( weaponPosition_ );
         }
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
         EquipCurrentWeapon();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (Input.GetKey(KeyCode.X))
@@ -56,7 +52,7 @@ public class WeaponController : MonoBehaviour
 
     private void EquipCurrentWeapon()
     {
-        weapons_[currentWeaponIndex_].Equip( weaponPosition_ );
+        weapons_[currentWeaponIndex_].Equip();
     }
 
     private void UnequipCurrentWeapon()

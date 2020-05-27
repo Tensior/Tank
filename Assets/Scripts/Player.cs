@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
-
-public class Player : CombatController
+﻿public class Player : CombatController
 {
     protected override void AllHealthLost()
     {

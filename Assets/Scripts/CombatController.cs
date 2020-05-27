@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public class CombatController : MonoBehaviour
@@ -21,7 +20,7 @@ public class CombatController : MonoBehaviour
 
     public void TakeDamage( float damage )
     {
-        currentHealth_ -= damage * armor_;
+        currentHealth_ -= damage * ( 1f - armor_ );
         if ( currentHealth_ <= 0f )
         {
             AllHealthLost();

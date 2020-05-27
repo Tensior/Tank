@@ -485,7 +485,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 38.9
+  field of view: 50.909378
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -510,13 +510,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.39984068, y: -0, z: -0, w: 0.9165847}
-  m_LocalPosition: {x: 0, y: 36, z: -41}
+  m_LocalRotation: {x: 0.44752407, y: -0, z: -0, w: 0.8942719}
+  m_LocalPosition: {x: 0, y: 36.6, z: -35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 47.136, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 53.170002, y: 0, z: 0}
 --- !u!1 &1214104770
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,6 +901,15 @@ PrefabInstance:
       propertyPath: maxHealth_
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 85888979, guid: 114406496c14eb848950612adade99dd, type: 3}
+      propertyPath: armor_
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028983146208546502, guid: 114406496c14eb848950612adade99dd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5028983146254927704, guid: 114406496c14eb848950612adade99dd,
         type: 3}
       propertyPath: allowedArea_
@@ -1070,7 +1079,7 @@ PrefabInstance:
     - target: {fileID: 2335657875988206906, guid: 1ad5fa994700df24ab47ad04e7c4b5e9,
         type: 3}
       propertyPath: maxNumberOfEnemies_
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2335657875988206907, guid: 1ad5fa994700df24ab47ad04e7c4b5e9,
         type: 3}

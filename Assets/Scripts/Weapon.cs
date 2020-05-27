@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent( typeof( ShellPool ) )]
 public class Weapon : MonoBehaviour
@@ -15,7 +13,6 @@ public class Weapon : MonoBehaviour
 
     private ShellPool shellPool_;
 
-    // Start is called before the first frame update
     private void Awake()
     {
         Unequip();
@@ -30,7 +27,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void Equip( Transform weaponPosition )
+    public void Equip()
     {
         gameObject.SetActive( true );
 
